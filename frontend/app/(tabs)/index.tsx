@@ -204,21 +204,21 @@ export default function Dashboard() {
                 <View style={styles.actionButtons}>
                   <TouchableOpacity
                     style={[styles.actionButton, { backgroundColor: colors.success }]}
-                    onPress={() => markAttendance(item.id, item.subjectId, 'present')}
+                    onPress={() => handleMarkAttendance(item.id, item.subjectId, 'present')}
                   >
                     <Ionicons name="checkmark" size={16} color="#fff" />
                     <Text style={styles.actionButtonText}>Present</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={[styles.actionButton, { backgroundColor: colors.error }]}
-                    onPress={() => markAttendance(item.id, item.subjectId, 'absent')}
+                    onPress={() => handleMarkAttendance(item.id, item.subjectId, 'absent')}
                   >
                     <Ionicons name="close" size={16} color="#fff" />
                     <Text style={styles.actionButtonText}>Absent</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={[styles.actionButton, { backgroundColor: colors.warning }]}
-                    onPress={() => markAttendance(item.id, item.subjectId, 'half')}
+                    onPress={() => handleMarkAttendance(item.id, item.subjectId, 'half')}
                   >
                     <Ionicons name="radio-button-on" size={16} color="#fff" />
                     <Text style={styles.actionButtonText}>Half</Text>
