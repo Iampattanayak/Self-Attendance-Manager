@@ -52,9 +52,9 @@ export default function Dashboard() {
     return calculateOverallStats(attendance, settings.targetPercentage);
   }, [attendance, settings]);
 
-  const markAttendance = async (classId: string, subjectId: string, status: string) => {
+  const handleMarkAttendance = async (classId: string, subjectId: string, status: string) => {
     const today = format(new Date(), 'yyyy-MM-dd');
-    await useData().markAttendance({
+    await markAttendanceContext({
       id: `${classId}_${today}`,
       classId,
       subjectId,
