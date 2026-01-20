@@ -8,14 +8,11 @@ import {
   TextInput,
   Alert,
   Platform,
-  Switch,
 } from 'react-native';
 import { useData } from '../contexts/DataContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { Ionicons } from '@expo/vector-icons';
-import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
-import * as DocumentPicker from 'expo-document-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { format, parseISO } from 'date-fns';
 import { exportData, importData, clearAllData } from '../services/storage';
