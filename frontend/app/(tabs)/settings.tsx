@@ -352,41 +352,9 @@ export default function Settings() {
         </View>
       </View>
 
-      {/* Backup & Restore */}
+      {/* Data Management */}
       <View style={[styles.section, { backgroundColor: colors.surface }]}>
         <Text style={[styles.sectionTitle, { color: colors.text }]}>Data Management</Text>
-
-        <TouchableOpacity
-          style={[styles.actionButton, { borderColor: colors.border }]}
-          onPress={handleExportData}
-        >
-          <View style={styles.actionContent}>
-            <Ionicons name="download-outline" size={24} color={colors.primary} />
-            <View style={styles.actionText}>
-              <Text style={[styles.actionTitle, { color: colors.text }]}>Export Data</Text>
-              <Text style={[styles.actionDescription, { color: colors.textSecondary }]}>
-                Backup all your attendance data
-              </Text>
-            </View>
-          </View>
-          <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.actionButton, { borderColor: colors.border }]}
-          onPress={handleImportData}
-        >
-          <View style={styles.actionContent}>
-            <Ionicons name="cloud-upload-outline" size={24} color={colors.primary} />
-            <View style={styles.actionText}>
-              <Text style={[styles.actionTitle, { color: colors.text }]}>Import Data</Text>
-              <Text style={[styles.actionDescription, { color: colors.textSecondary }]}>
-                Restore from a backup file
-              </Text>
-            </View>
-          </View>
-          <Ionicons name="chevron-forward" size={20} color={colors.textSecondary} />
-        </TouchableOpacity>
 
         <TouchableOpacity
           style={[styles.actionButton, { borderColor: colors.error }]}
