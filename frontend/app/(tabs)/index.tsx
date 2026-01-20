@@ -73,6 +73,14 @@ export default function Dashboard() {
     });
   };
 
+  const handleMarkHoliday = async () => {
+    const dateStr = format(selectedHolidayDate, 'yyyy-MM-dd');
+    await markDayAsHoliday(dateStr);
+    setHolidayModalVisible(false);
+    await refreshData();
+    Alert.alert('Success', `${format(selectedHolidayDate, 'MMM dd, yyyy')} marked as holiday!`);
+  };
+
   const getStatusColor = (status?: string) => {
     switch (status) {
       case 'present':
