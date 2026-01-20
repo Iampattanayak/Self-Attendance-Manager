@@ -252,7 +252,7 @@ export default function Analytics() {
                 </View>
 
                 <Text style={[styles.subjectDetail, { color: colors.textSecondary }]}>
-                  {stat.present} / {stat.total} classes \u2022{' '}
+                  {stat.present} / {stat.total} classes • {' '}
                   {isOnTrack
                     ? `Can skip ${stat.bunkable} more`
                     : `Attend next ${stat.required}`}
