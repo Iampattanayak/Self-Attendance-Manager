@@ -200,18 +200,6 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setAttendance(updatedAttendance);
   };
 
-  const addRescheduledClass = async (rescheduled: RescheduledClass) => {
-    const updated = [...rescheduledClasses, rescheduled];
-    await Storage.saveRescheduledClasses(updated);
-    setRescheduledClasses(updated);
-  };
-
-  const deleteRescheduledClass = async (id: string) => {
-    const updated = rescheduledClasses.filter(r => r.id !== id);
-    await Storage.saveRescheduledClasses(updated);
-    setRescheduledClasses(updated);
-  };
-
   const refreshData = async () => {
     await loadData();
   };
@@ -224,7 +212,6 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         classes,
         attendance,
         holidays,
-        rescheduledClasses,
         loading,
         updateSettings,
         addSubject,
