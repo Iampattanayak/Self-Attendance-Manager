@@ -5,7 +5,6 @@ import {
   ClassSchedule,
   AttendanceRecord,
   Holiday,
-  RescheduledClass,
 } from '../types';
 import * as Storage from '../services/storage';
 
@@ -15,7 +14,6 @@ interface DataContextType {
   classes: ClassSchedule[];
   attendance: AttendanceRecord[];
   holidays: Holiday[];
-  rescheduledClasses: RescheduledClass[];
   loading: boolean;
   updateSettings: (settings: Settings) => Promise<void>;
   addSubject: (subject: Subject) => Promise<void>;
@@ -29,8 +27,6 @@ interface DataContextType {
   addHoliday: (holiday: Holiday) => Promise<void>;
   deleteHoliday: (id: string) => Promise<void>;
   markDayAsHoliday: (date: string) => Promise<void>;
-  addRescheduledClass: (rescheduled: RescheduledClass) => Promise<void>;
-  deleteRescheduledClass: (id: string) => Promise<void>;
   refreshData: () => Promise<void>;
 }
 
@@ -42,7 +38,6 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [classes, setClasses] = useState<ClassSchedule[]>([]);
   const [attendance, setAttendance] = useState<AttendanceRecord[]>([]);
   const [holidays, setHolidays] = useState<Holiday[]>([]);
-  const [rescheduledClasses, setRescheduledClasses] = useState<RescheduledClass[]>([]);
   const [loading, setLoading] = useState(true);
 
   const loadData = async () => {
