@@ -168,6 +168,57 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setHolidays(updated);
   };
 
+  const markDayAsHoliday = async (date: string) => {
+    // Add holiday for the specific date
+    const holiday: Holiday = {
+      id: `holiday_${date}`,
+      startDate: date,
+      endDate: date,
+      note: 'Day marked as holiday',
+    };
+    await addHoliday(holiday);
+
+    // Mark all classes on that day as holiday
+    const dayOfWeek = new Date(date).getDay();
+    const dayClasses = classes.filter(c => c.weekday === dayOfWeek);
+    
+    const updatedAttendance = [...attendance];
+    dayClasses.forEach(cls => {
+      const existingIndex = updatedAttendance.findIndex(
+        a => a.classId === cls.id && a.date === date
+      );
+      
+      const record: AttendanceRecord = {
+        id: `${cls.id}_${date}`,
+        classId: cls.id,
+        subjectId: cls.subjectId,
+        date,
+        status: 'holiday',
+      };
+      
+      if (existingIndex >= 0) {
+        updatedAttendance[existingIndex] = record;
+      } else {
+        updatedAttendance.push(record);
+      }
+    });
+    
+    await Storage.saveAttendance(updatedAttendance);
+    setAttendance(updatedAttendance);
+  };
+
+  const addRescheduledClass = async (rescheduled: RescheduledClass) => {
+    const updated = [...rescheduledClasses, rescheduled];
+    await Storage.saveRescheduledClasses(updated);
+    setRescheduledClasses(updated);
+  };
+
+  const deleteRescheduledClass = async (id: string) => {
+    const updated = rescheduledClasses.filter(r => r.id !== id);
+    await Storage.saveRescheduledClasses(updated);
+    setRescheduledClasses(updated);
+  };
+
   const refreshData = async () => {
     await loadData();
   };
@@ -180,6 +231,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         classes,
         attendance,
         holidays,
+        rescheduledClasses,
         loading,
         updateSettings,
         addSubject,
