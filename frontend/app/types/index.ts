@@ -26,24 +26,12 @@ export interface ClassSchedule {
   durationMinutes: number;
 }
 
-export interface RescheduledClass {
-  id: string;
-  originalClassId: string;
-  originalDate: string;
-  subjectId: string;
-  newDate: string;
-  newTime: string;
-  durationMinutes: number;
-  reason?: string;
-}
-
 export interface AttendanceRecord {
   id: string;
   classId: string;
   subjectId: string;
   date: string;
   status: AttendanceStatus;
-  isRescheduled?: boolean;
 }
 
 export interface Holiday {
