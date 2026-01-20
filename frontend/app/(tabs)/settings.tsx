@@ -21,7 +21,7 @@ const WEEKDAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frida
 
 export default function Settings() {
   const { settings, updateSettings, refreshData } = useData();
-  const { colors } = useTheme();
+  const { colors, theme, setTheme } = useTheme();
 
   const [targetPercentage, setTargetPercentage] = useState(settings?.targetPercentage.toString() || '75');
   const [showStartPicker, setShowStartPicker] = useState(false);
