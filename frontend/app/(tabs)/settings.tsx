@@ -98,24 +98,28 @@ export default function Settings() {
   const handleImportData = () => {
     Alert.prompt(
       'Import Data',
-      'Paste your backup JSON data:',
+      'Paste your backup JSON data below:',
       [
         { text: 'Cancel', style: 'cancel' },
         {
           text: 'Import',
           style: 'default',
           onPress: async (text) => {
-            if (!text) return;
+            if (!text || text.trim() === '') {
+              Alert.alert('Error', 'No data provided');
+              return;
+            }
             try {
-              const success = await importData(text);
+              const success = await importData(text.trim());
               if (success) {
                 await refreshData();
-                Alert.alert('Success', 'Data imported successfully');
+                Alert.alert('Success', 'Data imported successfully! Please restart the app.');
               } else {
-                Alert.alert('Error', 'Failed to import data. Invalid format.');
+                Alert.alert('Error', 'Failed to import data. Please check the format.');
               }
             } catch (error) {
-              Alert.alert('Error', 'Failed to import data. Invalid format.');
+              console.error('Import error:', error);
+              Alert.alert('Error', 'Failed to import data. Invalid JSON format.');
             }
           },
         },
@@ -135,8 +139,21 @@ export default function Settings() {
           style: 'destructive',
           onPress: async () => {
             await clearAllData();
+            
+            // Recreate default settings after clearing
+            const defaultSettings = {
+              termStart: format(new Date(), 'yyyy-MM-dd'),
+              termEnd: format(new Date(Date.now() + 90 * 24 * 60 * 60 * 1000), 'yyyy-MM-dd'),
+              targetPercentage: 75,
+              weekStart: 1,
+              isOnboarded: true,
+              notificationsEnabled: true,
+              reminderMinutesBefore: 10,
+            };
+            
+            await updateSettings(defaultSettings);
             await refreshData();
-            Alert.alert('Success', 'All data cleared');
+            Alert.alert('Success', 'All data cleared successfully!');
           },
         },
       ]
