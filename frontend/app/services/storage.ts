@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Settings, Subject, ClassSchedule, AttendanceRecord, Holiday } from '../types';
+import { Settings, Subject, ClassSchedule, AttendanceRecord, Holiday, RescheduledClass } from '../types';
 
 const KEYS = {
   SETTINGS: 'attendance_settings',
@@ -7,6 +7,7 @@ const KEYS = {
   CLASSES: 'attendance_classes',
   ATTENDANCE: 'attendance_records',
   HOLIDAYS: 'attendance_holidays',
+  RESCHEDULED: 'attendance_rescheduled',
 };
 
 // Settings
