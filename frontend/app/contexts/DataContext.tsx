@@ -244,6 +244,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         updateAttendance,
         addHoliday,
         deleteHoliday,
+        markDayAsHoliday,
+        addRescheduledClass,
+        deleteRescheduledClass,
         refreshData,
       }}
     >
