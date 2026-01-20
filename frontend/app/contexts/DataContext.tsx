@@ -225,8 +225,6 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         addHoliday,
         deleteHoliday,
         markDayAsHoliday,
-        addRescheduledClass,
-        deleteRescheduledClass,
         refreshData,
       }}
     >
