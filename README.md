@@ -40,8 +40,6 @@ cd Self-Attendance-Manager-
 
 ## 📖 Usage
 
-[Add specific usage instructions here]
-
 1. Launch the application
 2. Create a new attendance session or load existing data
 3. Mark your attendance for each day
