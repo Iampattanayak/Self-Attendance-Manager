@@ -60,42 +60,38 @@ export default function Settings() {
       const jsonData = await exportData();
       const fileName = `attendance_backup_${format(new Date(), 'yyyy-MM-dd_HH-mm')}.json`;
       
-      // Create a blob for web or use sharing for mobile
+      // For web platform - download as file
       if (Platform.OS === 'web') {
-        // Web: Download file directly
-        const blob = new Blob([jsonData], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = fileName;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
+        // Create downloadable link
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(jsonData);
+        const downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href", dataStr);
+        downloadAnchorNode.setAttribute("download", fileName);
+        document.body.appendChild(downloadAnchorNode);
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
         Alert.alert('Success', 'Data exported successfully!');
       } else {
-        // Mobile: Use sharing
-        if (await Sharing.isAvailableAsync()) {
-          // Create a temporary file and share it
-          const data = `data:application/json;base64,${btoa(jsonData)}`;
-          await Sharing.shareAsync(data, {
-            mimeType: 'application/json',
-            dialogTitle: 'Export Attendance Data',
-            UTI: 'public.json',
-          });
-        } else {
-          Alert.alert('Export Data', jsonData, [
-            { text: 'Copy', onPress: () => {
-              // On mobile, show the data
-              Alert.alert('Success', 'Please copy the data manually');
-            }},
-            { text: 'OK' }
-          ]);
-        }
+        // For mobile - show in alert for copy
+        Alert.alert(
+          'Export Data',
+          'Copy the data below and save it:',
+          [
+            {
+              text: 'Show Data',
+              onPress: () => {
+                Alert.alert('Backup Data', jsonData.substring(0, 500) + '...', [
+                  { text: 'OK' }
+                ]);
+              }
+            },
+            { text: 'Cancel', style: 'cancel' }
+          ]
+        );
       }
     } catch (error) {
       console.error('Export error:', error);
-      Alert.alert('Error', 'Failed to export data. Please try again.');
+      Alert.alert('Error', `Failed to export data: ${error.message}`);
     }
   };
 
