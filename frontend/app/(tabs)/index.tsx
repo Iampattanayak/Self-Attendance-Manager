@@ -6,12 +6,14 @@ import {
   ScrollView,
   TouchableOpacity,
   RefreshControl,
+  useWindowDimensions,
 } from 'react-native';
 import { useData } from '../contexts/DataContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { Ionicons } from '@expo/vector-icons';
 import { format, parseISO } from 'date-fns';
 import { calculateOverallStats } from '../services/calculator';
+import { wp, hp, fp, getPadding, getCardGap } from '../utils/responsive';
 
 export default function Dashboard() {
   const { settings, subjects, classes, attendance, refreshData, markAttendance: markAttendanceContext } = useData();
