@@ -19,6 +19,7 @@ export default function Dashboard() {
   const { settings, subjects, classes, attendance, refreshData, markAttendance: markAttendanceContext } = useData();
   const { colors } = useTheme();
   const [refreshing, setRefreshing] = React.useState(false);
+  const dimensions = useWindowDimensions();
 
   const onRefresh = async () => {
     setRefreshing(true);
